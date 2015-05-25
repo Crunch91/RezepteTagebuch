@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RezepteTagebuch.Views.RecipeView">
+
+  <TableView>
+    <TableView.Root>
+      <TableSection Title="Rezept Info">
+        <!--Titel-->
+        <EntryCell Label="Titel" Text="{Binding RecipeTitle}"/>
+
+        <!--Kategorie-->
+        <ViewCell>
+          <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+            <Label Text="Kategorie" HorizontalOptions="Fill" YAlign="Center"/>
+            <!--Derzeit ist das Binding einer Collection über XAML NICHT möglich! Muss im Code-Behind gemacht werden.-->
+            <Picker x:Name="DishCategoriesPicker" SelectedIndex="{Binding DishCategoryIndex}"  HorizontalOptions="FillAndExpand"/>
+          </StackLayout>
+        </ViewCell>
+
+        <!--Datum-->
+        <ViewCell>
+          <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+            <Label Text="Datum" HorizontalOptions="FillAndExpand" YAlign="Center"/>
+            <DatePicker Date="{Binding CookDate}"  Format="dd.MM.yyyy" HorizontalOptions="Fill" />
+            <Button Text="+" Command="{Binding AddCookDateCommand}" />
+            <Button Text="Liste" Command="{Binding ShowCookDatesCommand}" />
+          </StackLayout>
+        </ViewCell>
+        <!--<ViewCell>
+                    <StackLayout HorizontalOptions="Fill" Orientation="Vertical">
+                        <ListView ItemsSource="{Binding CookDates}" >
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <ViewCell.View>
+                                            <Label Text="{Binding Date, StringFormat='Gekocht am {0:dd.MM.yyyy}'}" />
+                                        </ViewCell.View>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </StackLayout>
+                </ViewCell>-->
+
+        <!--Bilder-->
+        <ViewCell>
+          <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+            <Image Source="{Binding FoodPicture}"/>
+            <Button Text="Essensbild" Command="{Binding SelectFoodPictureCommand}" />
+            <Image Source="{Binding DescriptionPicture}"/>
+            <Button Text="Rezeptbild" Command="{Binding SelectDescriptionPictureCommand}" />
+          </StackLayout>
+        </ViewCell>
+
+        <!--Beschreibung-->
+        <ViewCell>
+          <StackLayout HorizontalOptions="Fill" Orientation="Vertical">
+            <Label Text="Beschreibung"/>
+            <Editor Text="{Binding Description}" HorizontalOptions="FillAndExpand"/>
+          </StackLayout>
+        </ViewCell>
+
+        <!--Hinweise-->
+        <EntryCell Label="Hinweis" Text="{Binding Hint}"/>
+
+        <!--Tags-->
+        <EntryCell Label="Tags" Text="{Binding Tags}" Placeholder="einfach, vegetarisch, deftig ..."/>
+
+        <!--Speichern/Abbrechen-->
+        <ViewCell>
+          <StackLayout HorizontalOptions="Fill" Orientation="Horizontal">
+            <Button Text="Save" Command="{Binding SaveRecipeCommand}" />
+            <Button Text="Cancel" Command="{Binding CancelRecipeCommand}" />
+          </StackLayout>
+        </ViewCell>
+      </TableSection>
+    </TableView.Root>
+  </TableView>
+</ContentPage>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:RezepteTagebuch;assembly=RezepteTagebuch"
+             x:Class="RezepteTagebuch.Views.AllRecipeView">
+  <!--xmlns:local="clr-namespace:RezepteTagebuch.Converter;assembly=RezepteTagebuch"-->
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <!--<local:ResizeImageConverter x:Key="cnvResizeImage" />-->
+    </ResourceDictionary>
+  </ContentPage.Resources>
+
+  <StackLayout>
+    <!--<ListView ItemsSource="{Binding Recipes}" IsGroupingEnabled="true" GroupDisplayBinding="{Binding Title}" GroupShortNameBinding="{Binding Title}">-->
+    <ListView ItemsSource="{Binding Recipes}">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
+              <!-- use a custom Markup Extension -->
+              <!--<Image WidthRequest="44" HeightRequest="44" Source="{local:ResizedImageSource WorkingWithImages.beach.jpg}" />-->
+              <!--<Image WidthRequest="44" HeightRequest="44" Source="{Binding FoodPicturePath, Converter={StaticResource cnvResizeImage}}" />-->
+              <!--<Image WidthRequest="44" HeightRequest="44" Source="{Binding FoodPicturePath}" />-->
+              <StackLayout  VerticalOptions="StartAndExpand" Orientation="Vertical">
+                <Label Text="{Binding Title}" YAlign="Center" Font="Medium" />
+              </StackLayout>
+            </StackLayout>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </StackLayout>
+</ContentPage>

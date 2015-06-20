@@ -14,6 +14,11 @@ namespace RezepteTagebuch.Shared.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
         protected INavigation _navigator;
 
+        protected BaseViewModel()
+        {
+
+        }
+
         public BaseViewModel(INavigation navigation)
         {
             _navigator = navigation;

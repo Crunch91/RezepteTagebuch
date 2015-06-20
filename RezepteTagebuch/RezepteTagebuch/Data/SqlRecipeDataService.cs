@@ -48,12 +48,13 @@ namespace RezepteTagebuch.Data
         /// </param>
         public SqlRecipeDataService()
         {
+            // databasePath === "/data/data/RezepteTagebuch.Droid/files/RezepteTagebuchSQLite.db3"
             var databasePath = DependencyService.Get<IFileService>().GetDataFilePath(sqliteFilename);
             _database = new SQLiteConnection(databasePath);
 
             // create the tables
-            //_database.DropTable<RecipeEntity>(); // Für Test
-            //_database.DropTable<RecipeCookDateEntity>(); // Für Test
+            //_database.DropTable<RecipeEntity>(); // Test
+            //_database.DropTable<RecipeCookDateEntity>(); // Test
             _database.CreateTable<RecipeEntity>();
             _database.CreateTable<RecipeCookDateEntity>();
         }

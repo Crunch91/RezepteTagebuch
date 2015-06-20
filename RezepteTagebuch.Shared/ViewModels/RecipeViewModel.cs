@@ -25,23 +25,27 @@ namespace RezepteTagebuch.Shared.ViewModels
         private float _thumbnailWidth = 100;
         private float _thumbnailHeight = 100;
 
+        /****************************/
+        /****** CONSTRUCTORS ********/
+        /****************************/
+
         public RecipeViewModel(INavigation navigation)
             : base(navigation)
         {
             // Sollten im Konstruktor die private Variabeln angesprochen werden?
 
             // Gerichtekategorie
-            dishCategories = new ObservableCollection<string>();
-            dishCategories.Add("Vorspeise");
-            dishCategories.Add("Hauptgericht");
-            dishCategories.Add("Nachspeise");
+            this.dishCategories = new ObservableCollection<string>();
+            this.dishCategories.Add("Vorspeise");
+            this.dishCategories.Add("Hauptgericht");
+            this.dishCategories.Add("Nachspeise");
 
-            // Kochdatum
-            cookDate = DateTime.Now.Date;
+            // Kochdatum - default
+            this.cookDate = DateTime.Now.Date;
 
-            // Kochdaten
-            cookDates = new ObservableCollection<DateTime>();
-            cookDates.CollectionChanged += OnCollectionChanged;
+            // Kochdaten - default
+            this.cookDates = new ObservableCollection<DateTime>();
+            this.cookDates.CollectionChanged += OnCollectionChanged;
 
             // Commands
             this.AddCookDateCommand = new RelayCommand(AddCookDate, AddCookDateCanExecute);
@@ -58,6 +62,20 @@ namespace RezepteTagebuch.Shared.ViewModels
             _fileService = DependencyService.Get<IFileService>();
         }
 
+        public RecipeViewModel(INavigation navigation, Recipe recipe)
+            : this(navigation)
+        {
+            this.recipeId = recipe.Id;
+            this.recipeTitle = recipe.Title;
+            this.description = recipe.Description;
+            this.hint = recipe.Hint;
+            this.tags = recipe.Tags;
+            this.cookDates = new ObservableCollection<DateTime>(recipe.CookDates);
+            this.dishCategorySelectedIndex = (int)recipe.DishCategory;
+            this.FoodPicturePath = recipe.FoodPicturePath;
+            this.DescriptionPicturePath = recipe.DescriptionPicturePath;
+        }
+
         /****************************/
         /********* EVENTS ***********/
         /****************************/
@@ -69,7 +87,7 @@ namespace RezepteTagebuch.Shared.ViewModels
         /******* PROPERTIES *********/
         /****************************/
 
-        public Guid RecipeId { get; set; }
+        private Guid recipeId { get; set; }
 
         private string recipeTitle;
         public string RecipeTitle

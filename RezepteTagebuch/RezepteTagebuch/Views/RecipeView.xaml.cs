@@ -1,4 +1,5 @@
-﻿using RezepteTagebuch.Shared.ViewModels;
+﻿using RezepteTagebuch.Shared.Models;
+using RezepteTagebuch.Shared.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,18 +22,17 @@ namespace RezepteTagebuch.Views
             }
         }
 
+        public RecipeView(Recipe recipe)
+            : this()
+        {
+            _viewModel = new RecipeViewModel(Navigation, recipe);
+            init();
+        }
+
         public RecipeView()
         {
-            InitializeComponent();
-            Title = "+";
             _viewModel = new RecipeViewModel(Navigation);
-            _viewModel.CookDatesClicked += (sender, args) =>
-            {
-                var vm = (RecipeViewModel)sender;
-                Navigation.PushModalAsync(new CookDatesPopupView(vm.CookDates.ToList()));
-            };
-
-            this.BindingContext = _viewModel;
+            init();
         }
 
         protected override void OnBindingContextChanged()
@@ -45,6 +45,19 @@ namespace RezepteTagebuch.Views
             {
                 this.DishCategoriesPicker.Items.Add(item);
             }
+        }
+
+        private void init()
+        {
+            InitializeComponent();
+            Title = "+";
+            _viewModel.CookDatesClicked += (sender, args) =>
+            {
+                var vm = (RecipeViewModel)sender;
+                Navigation.PushModalAsync(new CookDatesPopupView(vm.CookDates.ToList()));
+            };
+
+            this.BindingContext = _viewModel;
         }
 
         //protected async void OnSelectFoodPicture(object sender, EventArgs args)

@@ -1,4 +1,5 @@
-﻿using RezepteTagebuch.Shared.ViewModels;
+﻿using RezepteTagebuch.Shared.Models;
+using RezepteTagebuch.Shared.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,15 @@ namespace RezepteTagebuch.Views
             Title = "Alle Rezepte";
             _viewModel = new AllRecipeViewModel(Navigation);
             this.BindingContext = _viewModel;
+
+            var recipeListView = this.FindByName<ListView>("recipeList");
+            recipeListView.ItemSelected += async (sender, e) =>
+            {
+                var selectedRecipe = (Recipe)e.SelectedItem;
+                await Navigation.PushModalAsync(new RecipeView(selectedRecipe), true);
+                ((ListView)sender).SelectedItem = null;
+            };
+
         }
     }
 }

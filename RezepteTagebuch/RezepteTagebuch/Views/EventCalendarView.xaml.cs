@@ -30,7 +30,7 @@ namespace RezepteTagebuch.Views
             calendarControl = new CalendarView()
             {
                 VerticalOptions = LayoutOptions.Start,
-                HorizontalOptions = LayoutOptions.CenterAndExpand
+                HorizontalOptions = LayoutOptions.CenterAndExpand                
             };
             stackLayout.Children.Insert(0, calendarControl);
 

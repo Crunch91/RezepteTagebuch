@@ -20,7 +20,7 @@
               <!-- use a custom Markup Extension -->
               <!--<Image WidthRequest="44" HeightRequest="44" Source="{local:ResizedImageSource WorkingWithImages.beach.jpg}" />-->
               <!--<Image WidthRequest="44" HeightRequest="44" Source="{Binding FoodPicturePath, Converter={StaticResource cnvResizeImage}}" />-->
-              <!--<Image WidthRequest="44" HeightRequest="44" Source="{Binding FoodPicturePath}" />-->
+              <Image WidthRequest="44" HeightRequest="44" Source="{Binding FoodPicturePath}" />
               <StackLayout  VerticalOptions="StartAndExpand" Orientation="Vertical">
                 <Label Text="{Binding Title}" YAlign="Center" Font="Medium" />
               </StackLayout>
